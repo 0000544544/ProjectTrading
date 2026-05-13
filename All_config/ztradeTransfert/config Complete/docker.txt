@@ -1,0 +1,35 @@
+docker :
+sudo killall apt apt-get 2>/dev/null
+sudo rm -f /var/lib/apt/lists/lock /var/cache/apt/archives/lock /var/lib/dpkg/lock*
+sudo dpkg --configure -a
+curl -fsSL https://get.docker.com/ -o get-docker.sh
+sudo sh get-docker.sh
+
+repo meta5:
+
+git clone -b chapter-1 https://github.com/slowfound/metatrader5-quant-server-python.git
+cd metatrader5-quant-server-python
+cp .env.example .env
+nano .env
+
+apt install unzip
+wget https://github.com/Furious-Production-LTD/mql-zmq/archive/refs/heads/master.zip -O mql-zmq-fixed.zip
+unzip mql-zmq-fixed.zip
+
+docker network create traefik-public
+export TRAEFIK_HASHED_PASSWORD=$(openssl passwd -apr1)
+echo '{"min-api-version": "1.24"}' > /etc/docker/daemon.json
+sudo systemctl restart docker
+docker compose up -d
+docker logs traefik
+
+cp -r mql-zmq-master/Include/Zmq "config/.wine/drive_c/Program Files/MetaTrader 5/MQL5/Include/"
+cp -r mql-zmq-master/Include/Mql "config/.wine/drive_c/Program Files/MetaTrader 5/MQL5/Include/"
+cp mql-zmq-master/Library/VC2010/x64/*.dll "config/.wine/drive_c/Program Files/MetaTrader 5/MQL5/Libraries/"
+
+docker exec --user 911 -it mt5 bash
+curl -LO https://www.python.org/ftp/python/3.10.11/python-3.10.11-amd64.exe
+wine python-3.10.11-amd64.exe /quiet InstallAllUsers=1 PrependPath=1 Include_test=0
+wine python -m pip install "numpy<2.0.0" "pandas<2.2.0" MetaTrader5 python-dotenv --force-reinstall
+nohup wine python /config/bot_headless.py > /config/sortie_bot.log 2>&1 &
+tail -f /config/sortie_bot.log

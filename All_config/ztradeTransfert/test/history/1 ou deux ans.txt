@@ -1,0 +1,281 @@
+1 ou deux ans :
+(venv) PS C:\Users\AymaneELHOMAIDI\Documents\ztradeTransfert\history> python .\backtest_gold_bot_v2_1y.py
+╔══════════════════════════════════════════════════════════╗
+║       GOLD BOT V2 — BACKTESTER  (XAUUSD)                ║
+║  Spread=0.35pt | Slippage=0.1pt/leg (v2.1)          ║
+╚══════════════════════════════════════════════════════════╝
+
+
+🚀 Lancement du backtest sur 3 modes...
+
+🔄 Mode 🛡️  SAFE en cours... terminé → 80 trades | WR=37.5% | PnL=-817.88$  | Costs=-132.00$
+🔄 Mode ⚡  RISQUE en cours... terminé → 115 trades | WR=52.2% | PnL=-483.66$  | Costs=-189.75$
+🔄 Mode 🔥 RISQUE+++ en cours... terminé → 125 trades | WR=56.0% | PnL=-274.93$  | Costs=-206.25$
+
+══════════════════════════════════════════════════════════════
+  🛡️  SAFE  —  SL large, peu de trades, setups premium
+══════════════════════════════════════════════════════════════
+  Séquences testées      : 80
+  Win Rate               : 37.5%  (TP:7 | SL:73 | Mixed:0)
+  PnL Total              : -817.88$
+  PnL Moyen/trade        : -10.22$
+  Meilleur trade         : +78.91$
+  Pire trade             : -67.65$
+  Max Drawdown           : -831.36$
+  Profit Factor          : 0.36
+  Sharpe (annualisé)     : -2.34
+  Risque moyen/trade     : 7.7 pts
+  Score moyen            : 71.0/100
+  BUY/SELL               : 46/34
+  ─────────────────────────────────────────────────────
+  Coûts transactionnels  : -132.00$  (spread 0.35pt + slippage 0.1pt × 2 × 3 legs)
+  [Rappel : PnL ci-dessus INCLUT déjà ces coûts]
+
+══════════════════════════════════════════════════════════════
+  ⚡  RISQUE  —  Équilibre, paramètres standards
+══════════════════════════════════════════════════════════════
+  Séquences testées      : 115
+  Win Rate               : 52.2%  (TP:12 | SL:103 | Mixed:0)
+  PnL Total              : -483.66$
+  PnL Moyen/trade        : -4.21$
+  Meilleur trade         : +95.15$
+  Pire trade             : -67.65$
+  Max Drawdown           : -517.77$
+  Profit Factor          : 0.54
+  Sharpe (annualisé)     : -1.51
+  Risque moyen/trade     : 5.7 pts
+  Score moyen            : 66.9/100
+  BUY/SELL               : 67/48
+  ─────────────────────────────────────────────────────
+  Coûts transactionnels  : -189.75$  (spread 0.35pt + slippage 0.1pt × 2 × 3 legs)
+  [Rappel : PnL ci-dessus INCLUT déjà ces coûts]
+
+══════════════════════════════════════════════════════════════
+  🔥 RISQUE+++  —  SL minimum, haute fréquence
+══════════════════════════════════════════════════════════════
+  Séquences testées      : 125
+  Win Rate               : 56.0%  (TP:15 | SL:110 | Mixed:0)
+  PnL Total              : -274.93$
+  PnL Moyen/trade        : -2.20$
+  Meilleur trade         : +81.95$
+  Pire trade             : -67.65$
+  Max Drawdown           : -373.15$
+  Profit Factor          : 0.66
+  Sharpe (annualisé)     : -1.03
+  Risque moyen/trade     : 5.0 pts
+  Score moyen            : 66.3/100
+  BUY/SELL               : 73/52
+  ─────────────────────────────────────────────────────
+  Coûts transactionnels  : -206.25$  (spread 0.35pt + slippage 0.1pt × 2 × 3 legs)
+  [Rappel : PnL ci-dessus INCLUT déjà ces coûts]
+
+📊 Génération des graphiques…
+
+je crois sur 3 ans :
+╔══════════════════════════════════════════════════════════╗
+║       GOLD BOT V2 — BACKTESTER  (XAUUSD)                ║
+║  Spread=0.35pt | Slippage=0.1pt/leg (v2.1)          ║
+╚══════════════════════════════════════════════════════════╝
+
+
+🚀 Lancement du backtest sur 3 modes...
+
+🔄 Mode 🛡️  SAFE en cours... terminé → 93 trades | WR=36.6% | PnL=-914.18$  | Costs=-153.45$
+🔄 Mode ⚡  RISQUE en cours... terminé → 129 trades | WR=52.7% | PnL=-516.54$  | Costs=-212.85$
+🔄 Mode 🔥 RISQUE+++ en cours... terminé → 141 trades | WR=55.3% | PnL=-317.46$  | Costs=-232.65$
+
+══════════════════════════════════════════════════════════════
+  🛡️  SAFE  —  SL large, peu de trades, setups premium
+══════════════════════════════════════════════════════════════
+  Séquences testées      : 93
+  Win Rate               : 36.6%  (TP:7 | SL:86 | Mixed:0)
+  PnL Total              : -914.18$
+  PnL Moyen/trade        : -9.83$
+  Meilleur trade         : +78.91$
+  Pire trade             : -67.65$
+  Max Drawdown           : -918.94$
+  Profit Factor          : 0.34
+  Sharpe (annualisé)     : -2.46
+  Risque moyen/trade     : 7.1 pts
+  Score moyen            : 71.1/100
+  BUY/SELL               : 56/37
+  ─────────────────────────────────────────────────────
+  Coûts transactionnels  : -153.45$  (spread 0.35pt + slippage 0.1pt × 2 × 3 legs)
+  [Rappel : PnL ci-dessus INCLUT déjà ces coûts]
+
+══════════════════════════════════════════════════════════════
+  ⚡  RISQUE  —  Équilibre, paramètres standards
+══════════════════════════════════════════════════════════════
+  Séquences testées      : 129
+  Win Rate               : 52.7%  (TP:13 | SL:116 | Mixed:0)
+  PnL Total              : -516.54$
+  PnL Moyen/trade        : -4.00$
+  Meilleur trade         : +95.15$
+  Pire trade             : -67.65$
+  Max Drawdown           : -546.13$
+  Profit Factor          : 0.54
+  Sharpe (annualisé)     : -1.53
+  Risque moyen/trade     : 5.3 pts
+  Score moyen            : 67.2/100
+  BUY/SELL               : 78/51
+  ─────────────────────────────────────────────────────
+  Coûts transactionnels  : -212.85$  (spread 0.35pt + slippage 0.1pt × 2 × 3 legs)
+  [Rappel : PnL ci-dessus INCLUT déjà ces coûts]
+
+══════════════════════════════════════════════════════════════
+  🔥 RISQUE+++  —  SL minimum, haute fréquence
+══════════════════════════════════════════════════════════════
+  Séquences testées      : 141
+  Win Rate               : 55.3%  (TP:16 | SL:125 | Mixed:0)
+  PnL Total              : -317.46$
+  PnL Moyen/trade        : -2.25$
+  Meilleur trade         : +81.95$
+  Pire trade             : -67.65$
+  Max Drawdown           : -412.50$
+  Profit Factor          : 0.63
+  Sharpe (annualisé)     : -1.13
+  Risque moyen/trade     : 4.6 pts
+  Score moyen            : 66.8/100
+  BUY/SELL               : 86/55
+  ─────────────────────────────────────────────────────
+  Coûts transactionnels  : -232.65$  (spread 0.35pt + slippage 0.1pt × 2 × 3 legs)
+  [Rappel : PnL ci-dessus INCLUT déjà ces coûts]
+1 ou 2 ans ;
+╔══════════════════════════════════════════════════════════╗
+║       GOLD BOT V2 — BACKTESTER  (XAUUSD)                ║
+║  Spread=0.35pt | Slippage=0.1pt/leg (v2.1)          ║
+╚══════════════════════════════════════════════════════════╝
+
+
+🚀 Lancement du backtest sur 3 modes...
+
+🔄 Mode 🛡️  SAFE en cours... terminé → 35 trades | WR=37.1% | PnL=-478.83$  | Costs=-57.75$
+🔄 Mode ⚡  RISQUE en cours... terminé → 49 trades | WR=51.0% | PnL=-227.71$  | Costs=-80.85$
+🔄 Mode 🔥 RISQUE+++ en cours... terminé → 54 trades | WR=61.1% | PnL=-35.19$  | Costs=-89.10$
+
+══════════════════════════════════════════════════════════════
+  🛡️  SAFE  —  SL large, peu de trades, setups premium
+══════════════════════════════════════════════════════════════
+  Séquences testées      : 35
+  Win Rate               : 37.1%  (TP:5 | SL:30 | Mixed:0)
+  PnL Total              : -478.83$
+  PnL Moyen/trade        : -13.68$
+  Meilleur trade         : +78.91$
+  Pire trade             : -67.65$
+  Max Drawdown           : -478.83$
+  Profit Factor          : 0.42
+  Sharpe (annualisé)     : -2.14
+  Risque moyen/trade     : 11.4 pts
+  Score moyen            : 70.3/100
+  BUY/SELL               : 20/15
+  ─────────────────────────────────────────────────────
+  Coûts transactionnels  : -57.75$  (spread 0.35pt + slippage 0.1pt × 2 × 3 legs)
+  [Rappel : PnL ci-dessus INCLUT déjà ces coûts]
+
+══════════════════════════════════════════════════════════════
+  ⚡  RISQUE  —  Équilibre, paramètres standards
+══════════════════════════════════════════════════════════════
+  Séquences testées      : 49
+  Win Rate               : 51.0%  (TP:7 | SL:42 | Mixed:0)
+  PnL Total              : -227.71$
+  PnL Moyen/trade        : -4.65$
+  Meilleur trade         : +95.15$
+  Pire trade             : -67.65$
+  Max Drawdown           : -249.80$
+  Profit Factor          : 0.66
+  Sharpe (annualisé)     : -1.09
+  Risque moyen/trade     : 8.8 pts
+  Score moyen            : 66.8/100
+  BUY/SELL               : 31/18
+  ─────────────────────────────────────────────────────
+  Coûts transactionnels  : -80.85$  (spread 0.35pt + slippage 0.1pt × 2 × 3 legs)
+  [Rappel : PnL ci-dessus INCLUT déjà ces coûts]
+
+══════════════════════════════════════════════════════════════
+  🔥 RISQUE+++  —  SL minimum, haute fréquence
+══════════════════════════════════════════════════════════════
+  Séquences testées      : 54
+  Win Rate               : 61.1%  (TP:8 | SL:46 | Mixed:0)
+  PnL Total              : -35.19$
+  PnL Moyen/trade        : -0.65$
+  Meilleur trade         : +81.95$
+  Pire trade             : -67.65$
+  Max Drawdown           : -140.31$
+  Profit Factor          : 0.92
+  Sharpe (annualisé)     : -0.2
+  Risque moyen/trade     : 7.8 pts
+  Score moyen            : 65.9/100
+  BUY/SELL               : 35/19
+  ─────────────────────────────────────────────────────
+  Coûts transactionnels  : -89.10$  (spread 0.35pt + slippage 0.1pt × 2 × 3 legs)
+  [Rappel : PnL ci-dessus INCLUT déjà ces coûts]
+
+6 mois :
+╔══════════════════════════════════════════════════════════╗
+║       GOLD BOT V2 — BACKTESTER  (XAUUSD)                ║
+║  Spread=0.35pt | Slippage=0.1pt/leg (v2.1)          ║
+╚══════════════════════════════════════════════════════════╝
+
+
+🚀 Lancement du backtest sur 3 modes...
+
+🔄 Mode 🛡️  SAFE en cours... terminé → 19 trades | WR=42.1% | PnL=-223.68$  | Costs=-31.35$
+🔄 Mode ⚡  RISQUE en cours... terminé → 26 trades | WR=61.5% | PnL=-2.57$  | Costs=-42.90$
+🔄 Mode 🔥 RISQUE+++ en cours... terminé → 30 trades | WR=73.3% | PnL=+78.22$  | Costs=-49.50$
+
+══════════════════════════════════════════════════════════════
+  🛡️  SAFE  —  SL large, peu de trades, setups premium
+══════════════════════════════════════════════════════════════
+  Séquences testées      : 19
+  Win Rate               : 42.1%  (TP:2 | SL:17 | Mixed:0)
+  PnL Total              : -223.68$
+  PnL Moyen/trade        : -11.77$
+  Meilleur trade         : +78.91$
+  Pire trade             : -67.65$
+  Max Drawdown           : -289.08$
+  Profit Factor          : 0.52
+  Sharpe (annualisé)     : -1.75
+  Risque moyen/trade     : 13.7 pts
+  Score moyen            : 71.8/100
+  BUY/SELL               : 11/8
+  ─────────────────────────────────────────────────────
+  Coûts transactionnels  : -31.35$  (spread 0.35pt + slippage 0.1pt × 2 × 3 legs)
+  [Rappel : PnL ci-dessus INCLUT déjà ces coûts]
+
+══════════════════════════════════════════════════════════════
+  ⚡  RISQUE  —  Équilibre, paramètres standards
+══════════════════════════════════════════════════════════════
+  Séquences testées      : 26
+  Win Rate               : 61.5%  (TP:4 | SL:22 | Mixed:0)
+  PnL Total              : -2.57$
+  PnL Moyen/trade        : -0.10$
+  Meilleur trade         : +95.15$
+  Pire trade             : -67.65$
+  Max Drawdown           : -175.61$
+  Profit Factor          : 0.99
+  Sharpe (annualisé)     : -0.02
+  Risque moyen/trade     : 10.8 pts
+  Score moyen            : 67.5/100
+  BUY/SELL               : 17/9
+  ─────────────────────────────────────────────────────
+  Coûts transactionnels  : -42.90$  (spread 0.35pt + slippage 0.1pt × 2 × 3 legs)
+  [Rappel : PnL ci-dessus INCLUT déjà ces coûts]
+
+══════════════════════════════════════════════════════════════
+  🔥 RISQUE+++  —  SL minimum, haute fréquence
+══════════════════════════════════════════════════════════════
+  Séquences testées      : 30
+  Win Rate               : 73.3%  (TP:4 | SL:26 | Mixed:0)
+  PnL Total              : +78.22$
+  PnL Moyen/trade        : +2.61$
+  Meilleur trade         : +81.95$
+  Pire trade             : -67.65$
+  Max Drawdown           : -140.31$
+  Profit Factor          : 1.32
+  Sharpe (annualisé)     : 0.71
+  Risque moyen/trade     : 9.7 pts
+  Score moyen            : 66.7/100
+  BUY/SELL               : 21/9
+  ─────────────────────────────────────────────────────
+  Coûts transactionnels  : -49.50$  (spread 0.35pt + slippage 0.1pt × 2 × 3 legs)
+  [Rappel : PnL ci-dessus INCLUT déjà ces coûts]
