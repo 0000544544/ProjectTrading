@@ -131,7 +131,7 @@ state = {
     "total_signals_sent":  0,
     "last_trade_date":     None,
     "paused":              False,
-    "trading_mode":        "risque",   # safe | risque | risque+++
+    "trading_mode":        "safe",   # safe | risque | risque+++
     # Stats
     "wins":                0,
     "losses":              0,

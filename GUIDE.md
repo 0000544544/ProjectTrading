@@ -224,6 +224,8 @@ GoldBot/
 └── signal_copier.log         ← Logs du copier (créé automatiquement)
 ```
 
+
+
 ---
 
 ## Conseils avant de passer en réel

@@ -69,9 +69,9 @@ from config import (
 # ── Paramètres Telegram User API ─────────────────────────────────────────────
 # Va sur https://my.telegram.org → API development tools
 # Crée une app et copie les valeurs ici
-TELEGRAM_API_ID   = 31172323          # ← Remplace par ton api_id (numérique)
-TELEGRAM_API_HASH = "8c20e57ae501b3ea8bb51dd2b3642e57"         # ← Remplace par ton api_hash (string)
-TELEGRAM_PHONE    = "+32483393934"         # ← Ton numéro avec indicatif ex: "+33612345678"
+TELEGRAM_API_ID   = 33630903         # ← Remplace par ton api_id (numérique)
+TELEGRAM_API_HASH = "de917336f84ac00d5d8e9c42f2a675e8"         # ← Remplace par ton api_hash (string)
+TELEGRAM_PHONE    = "+32473394010"         # ← Ton numéro avec indicatif ex: "+33612345678"
 SESSION_NAME      = "signal_copier_session"   # Fichier de session créé localement
 
 # ── Canaux à écouter ──────────────────────────────────────────────────────────
@@ -117,7 +117,7 @@ active_copies: dict = {}
 pending_quick: dict = {}
 
 # Délai max pour recevoir le signal complet après l'alerte rapide (secondes)
-QUICK_ENTRY_TIMEOUT = 120
+QUICK_ENTRY_TIMEOUT = 120   # 2 minutes pour recevoir le signal complet
 
 # Paramètres dynamiques (modifiables via commandes Telegram du bot principal)
 copier_settings = {
