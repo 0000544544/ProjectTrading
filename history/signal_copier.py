@@ -60,7 +60,7 @@ except ImportError:
 
 # ── Config ────────────────────────────────────────────────────────────────────
 # Récupère depuis config.py du bot principal
-from config import (
+from history.config import (
     MT5_LOGIN, MT5_PASSWORD, MT5_SERVER,
     TELEGRAM_TOKEN, TELEGRAM_CHAT_ID,
     LOT_SIZE, SYMBOL

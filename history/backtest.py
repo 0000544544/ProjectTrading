@@ -17,7 +17,7 @@ import numpy as np
 
 # On réutilise les fonctions du bot
 sys.path.insert(0, ".")
-from bot import compute_indicators, determine_direction, compute_score, calculate_tp_sl
+from history.bot import compute_indicators, determine_direction, compute_score, calculate_tp_sl
 
 
 def load_csv(path: str) -> pd.DataFrame:

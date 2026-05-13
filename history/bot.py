@@ -36,7 +36,6 @@ import numpy as np
 import pandas as pd
 
 # ── Imports conditionnels ─────────────────────────────────────────────────────
-import database  # Nouveau module de base de données
 try:
     import MetaTrader5 as mt5
     MT5_AVAILABLE = True
@@ -63,14 +62,12 @@ except ImportError:
     class ContextTypes:
         DEFAULT_TYPE = None
 
-# try:
-#     import anthropic
-#     ANTHROPIC_AVAILABLE = True
-# except ImportError:
-#     ANTHROPIC_AVAILABLE = False
-#     print("❌ anthropic non installé — pip install anthropic")
-
-ANTHROPIC_AVAILABLE = False # Forcé à False pour désactiver l'IA
+try:
+    import anthropic
+    ANTHROPIC_AVAILABLE = True
+except ImportError:
+    ANTHROPIC_AVAILABLE = False
+    print("❌ anthropic non installé — pip install anthropic")
 
 # ── Config ────────────────────────────────────────────────────────────────────
 from config import (
@@ -134,7 +131,7 @@ state = {
     "total_signals_sent":  0,
     "last_trade_date":     None,
     "paused":              False,
-    "trading_mode":        "safe",   # safe | risque | risque+++
+    "trading_mode":        "risque",   # safe | risque | risque+++
     # Stats
     "wins":                0,
     "losses":              0,
@@ -624,58 +621,58 @@ def calculate_tp_sl(direction: str, entry: float, atr: float) -> dict:
 
 
 # ════════════════════════════════════════════════════════════════════════════════
-#  ANALYSE IA (DÉSACTIVÉE)
+#  ANALYSE IA (Claude)
 # ════════════════════════════════════════════════════════════════════════════════
 
-# async def ai_confirm_signal(ind: dict, direction: str, score: int,
-#                              reasons: list[str], df_m5: pd.DataFrame,
-#                              df_m15: pd.DataFrame, df_h1: pd.DataFrame) -> tuple[bool, str]:
-#     """Claude valide le contexte global pour éviter les trades contre tendance."""
-#     if not ANTHROPIC_AVAILABLE:
-#         return True, "Auto-confirmé (API non disponible)"
-#
-#     client  = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
-#     last_5  = df_m5.tail(5)[["Open", "High", "Low", "Close", "Volume"]].to_string(index=False)
-#     h1_ema  = df_h1["Close"].ewm(span=20).mean().iloc[-1]
-#     h1_dir  = "HAUSSIER" if df_h1["Close"].iloc[-1] > h1_ema else "BAISSIER"
-#     m15_ind = compute_indicators(df_m15.tail(50).reset_index(drop=True))
-#
-#     prompt = f"""Tu es expert en scalping GOLD (XAUUSD) M5.
-#
-# SIGNAL : {direction} | SCORE : {score}/100
-# RAISONS : {', '.join(reasons)}
-#
-# INDICATEURS M5 :
-# - Prix : {ind['price']} | ATR : {ind['atr']}
-# - RSI(14) : {ind['rsi']} | Stoch K/D : {ind['stoch_k']}/{ind['stoch_d']}
-# - MACD hist : {ind['macd_hist']} | Cross bull: {ind['macd_cross_bull']} | Cross bear: {ind['macd_cross_bear']}
-# - EMA9: {ind['ema9']} | EMA20: {ind['ema20']} | EMA50: {ind['ema50']}
-# - Bollinger : [{ind['bb_low']} — {ind['bb_mid']} — {ind['bb_up']}]
-# - Volume : {ind['vol_ratio']}x | Pattern : {ind['pattern']}
-# - Proche support : {ind['near_support']} ({ind['recent_low']})
-# - Proche résistance : {ind['near_resistance']} ({ind['recent_high']})
-#
-# CONTEXTE :
-# - Tendance H1 : {h1_dir}
-# - RSI M15 : {round(m15_ind['rsi'], 1)} | EMA9 M15 : {m15_ind['ema9']}
-#
-# DERNIÈRES BOUGIES M5 :
-# {last_5}
-#
-# Réponds uniquement : CONFIRME ou REFUSE — [explication courte, 2 lignes max]"""
-#
-#     try:
-#         response  = client.messages.create(
-#             model="claude-sonnet-4-20250514",
-#             max_tokens=150,
-#             messages=[{"role": "user", "content": prompt}]
-#         )
-#         text      = response.content[0].text.strip()
-#         confirmed = text.upper().startswith("CONFIRME")
-#         return confirmed, text
-#     except Exception as e:
-#         log.error(f"Erreur API Anthropic : {e}")
-#         return True, "Auto-confirmé (erreur API)"
+async def ai_confirm_signal(ind: dict, direction: str, score: int,
+                             reasons: list[str], df_m5: pd.DataFrame,
+                             df_m15: pd.DataFrame, df_h1: pd.DataFrame) -> tuple[bool, str]:
+    """Claude valide le contexte global pour éviter les trades contre tendance."""
+    if not ANTHROPIC_AVAILABLE:
+        return True, "Auto-confirmé (API non disponible)"
+
+    client  = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+    last_5  = df_m5.tail(5)[["Open", "High", "Low", "Close", "Volume"]].to_string(index=False)
+    h1_ema  = df_h1["Close"].ewm(span=20).mean().iloc[-1]
+    h1_dir  = "HAUSSIER" if df_h1["Close"].iloc[-1] > h1_ema else "BAISSIER"
+    m15_ind = compute_indicators(df_m15.tail(50).reset_index(drop=True))
+
+    prompt = f"""Tu es expert en scalping GOLD (XAUUSD) M5.
+
+SIGNAL : {direction} | SCORE : {score}/100
+RAISONS : {', '.join(reasons)}
+
+INDICATEURS M5 :
+- Prix : {ind['price']} | ATR : {ind['atr']}
+- RSI(14) : {ind['rsi']} | Stoch K/D : {ind['stoch_k']}/{ind['stoch_d']}
+- MACD hist : {ind['macd_hist']} | Cross bull: {ind['macd_cross_bull']} | Cross bear: {ind['macd_cross_bear']}
+- EMA9: {ind['ema9']} | EMA20: {ind['ema20']} | EMA50: {ind['ema50']}
+- Bollinger : [{ind['bb_low']} — {ind['bb_mid']} — {ind['bb_up']}]
+- Volume : {ind['vol_ratio']}x | Pattern : {ind['pattern']}
+- Proche support : {ind['near_support']} ({ind['recent_low']})
+- Proche résistance : {ind['near_resistance']} ({ind['recent_high']})
+
+CONTEXTE :
+- Tendance H1 : {h1_dir}
+- RSI M15 : {round(m15_ind['rsi'], 1)} | EMA9 M15 : {m15_ind['ema9']}
+
+DERNIÈRES BOUGIES M5 :
+{last_5}
+
+Réponds uniquement : CONFIRME ou REFUSE — [explication courte, 2 lignes max]"""
+
+    try:
+        response  = client.messages.create(
+            model="claude-sonnet-4-20250514",
+            max_tokens=150,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        text      = response.content[0].text.strip()
+        confirmed = text.upper().startswith("CONFIRME")
+        return confirmed, text
+    except Exception as e:
+        log.error(f"Erreur API Anthropic : {e}")
+        return True, "Auto-confirmé (erreur API)"
 
 
 # ════════════════════════════════════════════════════════════════════════════════
@@ -1752,17 +1749,6 @@ async def monitor_active_trade(app):
                     trade["closed"]    = True
                     trade["result"]    = "MANUEL"
                     trade["pnl_final"] = real_pnl
-                    
-                    # Mise à jour Base de données
-                    duration = int((datetime.now() - trade.get('open_time_raw', datetime.now())).total_seconds())
-                    database.update_closed_trade(ticket, {
-                        "close_price": real_exit or price,
-                        "pnl_usd": real_pnl,
-                        "pnl_points": round(abs((real_exit or price) - entry), 2),
-                        "exit_type": "MANUEL",
-                        "duration_sec": duration
-                    })
-                    
                     log.info(f"ℹ️ Trade #{ticket} fermé manuellement — PnL réel: {real_pnl}$")
                     if real_pnl != 0:
                         state["daily_pnl"] = round(state["daily_pnl"] + real_pnl, 2)
@@ -1778,19 +1764,8 @@ async def monitor_active_trade(app):
             trade["closed"]     = True
             trade["result"]     = f"TP{tp_target}"
             pips                = round(abs(tp_price - entry), 2)
-            pnl_dollar          = round(pips * (trade.get('lot', LOT_SIZE)) * 100, 2)
+            pnl_dollar          = round(pips * LOT_SIZE * 100, 2)
             trade["pnl_final"]  = pnl_dollar
-            
-            # Mise à jour Base de données
-            duration = int((datetime.now() - trade.get('open_time_raw', datetime.now())).total_seconds())
-            database.update_closed_trade(ticket, {
-                "close_price": tp_price,
-                "pnl_usd": pnl_dollar,
-                "pnl_points": pips,
-                "exit_type": f"TP{tp_target}",
-                "duration_sec": duration
-            })
-            
             state["daily_pnl"]  = round(state["daily_pnl"] + pnl_dollar, 2)
             state["wins"]      += 1
             state["current_streak"] = state["current_streak"] + 1 if state["current_streak"] >= 0 else 1
@@ -1857,19 +1832,8 @@ async def monitor_active_trade(app):
             trade["closed"]     = True
             trade["result"]     = "SL"
             loss                = round(abs(levels["sl"] - entry), 2)
-            pnl_dollar          = -round(loss * (trade.get('lot', LOT_SIZE)) * 100, 2)
+            pnl_dollar          = -round(loss * LOT_SIZE * 100, 2)
             trade["pnl_final"]  = pnl_dollar
-            
-            # Mise à jour Base de données
-            duration = int((datetime.now() - trade.get('open_time_raw', datetime.now())).total_seconds())
-            database.update_closed_trade(ticket, {
-                "close_price": levels["sl"],
-                "pnl_usd": pnl_dollar,
-                "pnl_points": -loss,
-                "exit_type": "SL",
-                "duration_sec": duration
-            })
-            
             state["daily_pnl"]  = round(state["daily_pnl"] + pnl_dollar, 2)
             state["losses"]    += 1
             state["last_sl_time"] = time.time()
@@ -2102,9 +2066,8 @@ async def analysis_loop(app):
             if AUTO_TRADE:
                 results = place_orders(direction, ind["price"], levels)
                 if results:
-                    opened_trades = []
-                    for r in results:
-                        trade_entry = {
+                    state["active_trades"] = [
+                        {
                             "direction":  direction,
                             "entry":      ind["price"],
                             "levels":     levels,
@@ -2112,18 +2075,9 @@ async def analysis_loop(app):
                             "tp_target":  r["tp_target"],
                             "tp_alerted": False,
                             "sl_alerted": False,
-                            "open_time_raw": datetime.now(),
-                            # Données pour la base
-                            "lot":        r.get('lot', LOT_SIZE),
-                            "score":      score,
-                            "reasons":    ", ".join(reasons),
-                            "trading_mode": state.get("trading_mode"),
-                            **ind # Inclut RSI, ATR, etc.
                         }
-                        opened_trades.append(trade_entry)
-                        database.save_open_trade(trade_entry) # Sauvegarde SQLite
-                    
-                    state["active_trades"] = opened_trades
+                        for r in results
+                    ]
                     state["trades_today"]       += 1
                     state["last_signal_time"]    = time.time()
                     state["total_signals_sent"] += 1
@@ -2183,7 +2137,6 @@ async def main():
         return
 
     connect_mt5()
-    database.init_db()  # Initialisation SQLite
 
     app = Application.builder().token(TELEGRAM_TOKEN).build()
 
